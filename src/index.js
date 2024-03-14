@@ -1,5 +1,5 @@
 import { ToDo } from "./todo-class";
-import { saveObject } from "./save-object";
+import { saveObject, loadObject } from "./save-object";
 
 console.log("Hello")
 
@@ -13,6 +13,7 @@ function programEngine(){
 
   console.log(item);
   saveObject(item);
+  loadObject()
 }
 
 programEngine();
