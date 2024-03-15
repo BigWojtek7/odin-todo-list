@@ -1,14 +1,14 @@
 
 function saveObject(object){
-  localStorage.setItem("todos", JSON.stringify(object))
+  localStorage.setItem(`${object.project}.${object.title}`, JSON.stringify(object))
 }
 
 
 
 function loadObject(){
-  const items = JSON.parse({ ...localStorage });
-
-  console.log("load", items);
+  for (let i = 0; i < localStorage.length; i++) {
+    console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
+  }
 
 }
 

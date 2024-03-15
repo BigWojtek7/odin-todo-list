@@ -5,9 +5,8 @@ console.log("Hello")
 
 function programEngine(){
   let input = prompt("title, description, dueDate, priority, isDone").split(",");
-  // ()
+  // (makeup,face,tomorrow,high,not)
 
-  console.log(input);
 
   let item = new ToDo(...input)
 
