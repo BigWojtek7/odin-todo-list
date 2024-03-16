@@ -6,10 +6,15 @@ function saveObject(object){
 
 
 function loadObject(){
+  const todoArr = [];
   for (let i = 0; i < localStorage.length; i++) {
-    console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
-  }
+    let toDoObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
+    todoArr.push(toDoObject);
 
+    // console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
+  }
+  const getArray = () => todoArr;
+  return {getArray}
 }
 
 function deleteObject(key){
