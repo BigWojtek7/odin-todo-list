@@ -1,11 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To-Do List</title>
-</head>
-<body>
-  
-<script defer src="runtime.bundle.js"></script><script defer src="index.bundle.js"></script></body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+  </head>
+  <body>
+    <header>
+      <h1>To-Do List Program</h1>
+    </header>
+    <dialog id="add-item">
+      <form id="get-book" method="dialog">
+
+        <label for="title">Title:</label>
+        <input id="title" type="text" name="title" required>
+
+        <label for="description">Description:</label>
+        <input id="description" type="text" name="description" required>
+
+        <label for="due-date">Due Date:</label>
+        <input id="due-date" type="text" name="due-date" required>
+
+        <label for="priority">Priority:</label>
+        <input id="priority" type="text" name="priority" required>
+
+        <label for="is-done">Is Done?:</label>
+        <input id="is-done" type="text" name="is-done" required>
+      
+        <button type="submit">Submit</button>
+        <button id="close-button">Close</button>
+      </form>
+    </dialog>
+    <div class="content">
+      <button id="add-button">+</button>
+    </div>
+    
+  <script defer src="runtime.bundle.js"></script><script defer src="index.bundle.js"></script></body>
 </html>
