@@ -26,11 +26,11 @@ function displayHandler(){
     newDivProject.dataset.project = todoArray[0].project
     newDivProject.textContent = todoArray[0].project
 
-    todoArray.forEach(el => {
+    todoArray.forEach((el, index) => {
       const newDiv = document.createElement("div");
       console.log(todoArray)
 
-      newDiv.innerHTML = `${el.title}, ${el.description}, ${el.dueDate} <button>Delete</button>`;
+      newDiv.innerHTML = `${el.title}, ${el.description}, ${el.dueDate} <button data-index=${index}>Delete</button>`;
       
       if (newDivProject.dataset.project === el.project){
         newDivProject.appendChild(newDiv);
