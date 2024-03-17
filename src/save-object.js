@@ -1,19 +1,22 @@
 
-function saveObject(object){
-  localStorage.setItem(`${object.project}.${object.title}`, JSON.stringify(object))
+function saveObject(todoArray){
+  localStorage.clear();
+  todoArray.forEach(el => {
+  localStorage.setItem(`${el.project}.${el.title}`, JSON.stringify(el))
+  });
 }
 
 
 
 function loadObject(){
-  const todoArr = [];
+  const todoArray = [];
   for (let i = 0; i < localStorage.length; i++) {
     let toDoObject = JSON.parse(localStorage.getItem(localStorage.key(i)));
-    todoArr.push(toDoObject);
+    todoArray.push(toDoObject);
 
     // console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
   }
-  const getArray = () => todoArr;
+  const getArray = () => todoArray;
   return {getArray}
 }
 

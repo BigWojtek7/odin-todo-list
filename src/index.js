@@ -8,13 +8,14 @@ console.log("Hello")
 function programEngine(item){
   // let input = prompt("title, description, dueDate, priority, isDone").split(",");
   // // (makeup,face,tomorrow,high,not)
-
+  
 
   item = new ToDo(...item);
-  item.changeProject("papuge")
-  
   saveObject(item);
-  console.log(loadObject().getArray());
+  const todoArray = loadObject().getArray();
+  return {getArray: loadObject().getArray()}
+
+
 }
 
 export {programEngine}
