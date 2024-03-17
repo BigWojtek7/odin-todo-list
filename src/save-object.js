@@ -1,8 +1,10 @@
+import { displayHandler } from "./DOM";
 
 function saveObject(todoArray){
   localStorage.clear();
   todoArray.forEach(el => {
   localStorage.setItem(`${el.project}.${el.title}`, JSON.stringify(el))
+  displayHandler();
   });
 }
 
@@ -16,13 +18,24 @@ function loadObject(){
 
     // console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
   }
+  todoArray.sort((a , b) => a.project > b.project ? 1 : -1);
   const getArray = () => todoArray;
   return {getArray}
 }
 
-function deleteObject(key){
-  localStorage.removeItem(key)
+function deleteObject(index){
+  const todoArray = loadObject().getArray();
+  todoArray.splice(index, 1);
+  saveObject(todoArray);
+  // localStorage.removeItem(key)
 
 }
 
-export {saveObject, loadObject, deleteObject}
+function addTodo(todo){
+  const todoArray = loadObject().getArray();
+  todoArray.push(todo)
+  saveObject(todoArray)
+
+}
+
+export {saveObject, loadObject, deleteObject, addTodo}

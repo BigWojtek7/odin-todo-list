@@ -1,4 +1,4 @@
-import { loadObject, saveObject } from "./save-object";
+import { loadObject, saveObject, deleteObject, addTodo } from "./save-object";
 import { ToDo } from "./todo-class";
 import { programEngine } from ".";
 
@@ -14,13 +14,15 @@ function displayHandler(){
 
   const divContent = document.querySelector(".content");
   
-  const todoArray = loadObject().getArray();
+  
+
 
   const updateDisplay = () => {
-    divContent.textContent = "";
 
-   
-    todoArray.sort((a , b) => a.project > b.project ? 1 : -1)
+    const todoArray = loadObject().getArray();
+
+    divContent.textContent = "";
+    // todoArray.sort((a , b) => a.project > b.project ? 1 : -1)
 
     let newDivProject = document.createElement("div");
     newDivProject.dataset.project = todoArray[0].project
@@ -48,6 +50,13 @@ function displayHandler(){
 
   updateDisplay();
 
+  const deleteButton = document.querySelectorAll("[data-index]")
+
+  deleteButton.forEach(button => {
+    button.addEventListener("click", () => {
+      deleteObject(button.dataset.index);
+    })
+  });
 
 
 
@@ -65,10 +74,14 @@ function displayHandler(){
     const isDone = document.getElementById("is-done").value;
     
     let todo = new ToDo(title, description, dueDate, priority, isDone);
-    todoArray.push(todo)
-    saveObject(todoArray)
-    updateDisplay();
-});
+    addTodo(todo);
+    // saveObject(todoArray)
+    // updateDisplay();
+  });
+  return {updateDisplay}
+
 }
 
 displayHandler()
+
+export {displayHandler}
