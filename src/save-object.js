@@ -2,8 +2,8 @@ import { displayHandler } from "./DOM";
 
 function saveObject(todoArray){
   localStorage.clear();
-  todoArray.forEach(el => {
-  localStorage.setItem(`${el.project}.${el.title}`, JSON.stringify(el))
+  todoArray.forEach((todo, index) => {
+  localStorage.setItem(`${index}`, JSON.stringify(todo));
   displayHandler();
   });
 }

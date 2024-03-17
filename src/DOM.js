@@ -30,7 +30,7 @@ function displayHandler(){
 
     todoArray.forEach((el, index) => {
       const newDiv = document.createElement("div");
-      console.log(todoArray)
+      console.log(el)
 
       newDiv.innerHTML = `${el.title}, ${el.description}, ${el.dueDate} <button data-index=${index}>Delete</button>`;
       
@@ -50,7 +50,7 @@ function displayHandler(){
 
   updateDisplay();
 
-  const deleteButton = document.querySelectorAll("[data-index]")
+  const deleteButton = document.querySelectorAll("[data-index]");
 
   deleteButton.forEach(button => {
     button.addEventListener("click", () => {
@@ -58,6 +58,13 @@ function displayHandler(){
     })
   });
 
+  const divProject = document.querySelectorAll("[data-project]");
+  divProject.forEach(div => {
+    div.addEventListener("click", () => {
+      console.log(div.dataset.project);
+    });
+    
+  });
 
 
   addButton.addEventListener("click", () => {
