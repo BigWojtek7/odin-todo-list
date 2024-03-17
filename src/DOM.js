@@ -18,17 +18,33 @@ function displayHandler(){
 
   const updateDisplay = () => {
     divContent.textContent = "";
-    
+
+   
+    todoArray.sort((a , b) => a.project > b.project ? 1 : -1)
+
+    let newDivProject = document.createElement("div");
+    newDivProject.dataset.project = todoArray[0].project
+    newDivProject.textContent = todoArray[0].project
 
     todoArray.forEach(el => {
-        const newDiv = document.createElement("div");
-        const newDivProject = document.createElement("div");
+      const newDiv = document.createElement("div");
+      console.log(todoArray)
 
-        
-        newDiv.innerHTML = `${el.title}, ${el.description}, ${el.dueDate} <button>Delete</button>`;
-        divContent.appendChild(newDiv);
-      });
+      newDiv.innerHTML = `${el.title}, ${el.description}, ${el.dueDate} <button>Delete</button>`;
+      
+      if (newDivProject.dataset.project === el.project){
+        newDivProject.appendChild(newDiv);
+      } else {
+        divContent.appendChild(newDivProject);
+        newDivProject = document.createElement("div");
+        newDivProject.textContent = el.project;
+        newDivProject.dataset.project = el.project;
+        newDivProject.appendChild(newDiv);
+      }
+    });
+    divContent.appendChild(newDivProject)
   }
+
 
   updateDisplay();
 
