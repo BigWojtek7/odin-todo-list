@@ -3,8 +3,7 @@ import { displayHandler } from "./DOM";
 function saveObject(todoArray){
   localStorage.clear();
   todoArray.forEach((todo, index) => {
-  localStorage.setItem(`${index}`, JSON.stringify(todo));
-  displayHandler();
+    localStorage.setItem(`${index}`, JSON.stringify(todo));
   });
 }
 

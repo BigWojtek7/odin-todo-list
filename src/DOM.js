@@ -21,15 +21,20 @@ function displayHandler(){
 
     const todoArray = loadObject().getArray();
 
+    if (todoArray[0] === undefined) return
+
     divContent.textContent = "";
     // todoArray.sort((a , b) => a.project > b.project ? 1 : -1)
 
     let newDivProject = document.createElement("div");
     newDivProject.dataset.project = todoArray[0].project
-    newDivProject.textContent = todoArray[0].project
+    newDivProject.innerHTML = `${todoArray[0].project} <button>Expand</button>`
 
     todoArray.forEach((el, index) => {
       const newDiv = document.createElement("div");
+      // const newButtonExpand = document.createElement("button")
+      // newButtonExpand.innerHTML="Expand"
+      // newDivProject.appendChild(newButtonExpand);
       console.log(el)
 
       newDiv.innerHTML = `${el.title}, ${el.description}, ${el.dueDate} <button data-index=${index}>Delete</button>`;
@@ -39,32 +44,77 @@ function displayHandler(){
       } else {
         divContent.appendChild(newDivProject);
         newDivProject = document.createElement("div");
-        newDivProject.textContent = el.project;
+        newDivProject.innerHTML = `${el.project} <button>Expand</button>`
         newDivProject.dataset.project = el.project;
+        // newDivProject.appendChild(newButtonExpand);
         newDivProject.appendChild(newDiv);
       }
     });
     divContent.appendChild(newDivProject)
   }
 
-
   updateDisplay();
 
-  const deleteButton = document.querySelectorAll("[data-index]");
+  function clickHandler(e){
+    const datasetButton = e.target.dataset.index;
+    const datasetDiv = e.target.closest("div").dataset.project;
 
-  deleteButton.forEach(button => {
-    button.addEventListener("click", () => {
-      deleteObject(button.dataset.index);
-    })
-  });
+    const dialogExpand = document.querySelector(".dialog-expand")
 
-  const divProject = document.querySelectorAll("[data-project]");
-  divProject.forEach(div => {
-    div.addEventListener("click", () => {
-      console.log(div.dataset.project);
-    });
+    if(datasetButton){
+      deleteObject(datasetButton);
+      updateDisplay();
+    } else if(datasetDiv) {
+        const todoArray = loadObject().getArray();
+        dialogExpand.innerHTML= "";
+        // console.log(todoArray.filter(item => div.dataset.project === item.project));
+        console.log(datasetDiv)
+        const projectArray = todoArray.filter(item => datasetDiv === item.project)
+        console.log("funny", projectArray)
+        projectArray.forEach(el => {
+          
+          const newDiv = document.createElement("div")
+          newDiv.innerHTML=`${el.project}, ${el.title}, ${el.description}, ${el.dueDate}, ${el.priority}, ${el.isDone},`
+          dialogExpand.appendChild(newDiv);
+          dialogExpand.showModal();
+        });
+      
+
+    }
+  }
+
+  divContent.addEventListener("click", clickHandler);
+  // const deleteButton = document.querySelectorAll("[data-index]");
+  // console.log("1", deleteButton)
+  // deleteButton.forEach(button => {
+  //   button.addEventListener("click", () => {
+  //     deleteObject(button.dataset.index);
+  //     updateDisplay();
+  //     console.log(button.dataset.index);
+  //   });
+  // });
+
+  // const dialogExpand = document.querySelector(".dialog-expand")
+
+  // const divProject = document.querySelectorAll("[data-project]");
+  // divProject.forEach(div => {
+  //   div.addEventListener("click", () => {
+  //     const todoArray = loadObject().getArray();
+  //     dialogExpand.innerHTML= "";
+  //     // console.log(todoArray.filter(item => div.dataset.project === item.project));
+  //     const projectArray = todoArray.filter(item => div.dataset.project === item.project)
+  //     console.log("funny", projectArray)
+  //     projectArray.forEach(el => {
+        
+  //       const newDiv = document.createElement("div")
+  //       newDiv.innerHTML=`${el.project}, ${el.title}, ${el.description}, ${el.dueDate}, ${el.priority}, ${el.isDone},`
+  //       dialogExpand.appendChild(newDiv);
+  //       dialogExpand.showModal();
+  //     });
+      
+  //   });
     
-  });
+  // });
 
 
   addButton.addEventListener("click", () => {
@@ -82,10 +132,16 @@ function displayHandler(){
     
     let todo = new ToDo(title, description, dueDate, priority, isDone);
     addTodo(todo);
+    form.reset();
+    dialog.close();
+    updateDisplay()
+    console.log("2", deleteButton)
     // saveObject(todoArray)
     // updateDisplay();
   });
-  return {updateDisplay}
+  
+
+  // return {updateDisplay}
 
 }
 
