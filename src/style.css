@@ -29,6 +29,14 @@ div [data-project] {
   background-color: #ffffff;
   box-shadow: 3px 4px 3px #bebebe;
   border-radius: 7px;
+  line-height: 2em;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: 900;
+  display: inline-block;
+  
 }
 
 .add-item #add-button {
@@ -40,11 +48,17 @@ div [data-project] {
   border: none;
 }
 
-.dialog-expand {
+#dialog-expand {
   font-size: 1.2rem;
   width: 500px;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 200px;
   background: #f6f6f6;
   padding: 30px;
 }
+
+::backdrop {
+  background-image: linear-gradient(#b5b5b5,#ffffff);
+  opacity: 0.75;
+}
+
