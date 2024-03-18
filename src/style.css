@@ -20,12 +20,12 @@ header {
   display: grid;
   gap: 30px;
   grid-template-columns: repeat(3, minmax(250px, 1fr));
-  margin: 30px;
+  margin: 30px 50px;
 }
 
 div [data-project] {
   color: #477bff;
-  padding: 10px;
+  padding: 20px;
   background-color: #ffffff;
   box-shadow: 3px 4px 3px #bebebe;
   border-radius: 7px;
@@ -48,7 +48,17 @@ div [data-project] {
   border: none;
 }
 
-#dialog-expand {
+button {
+  font-size: 1rem;
+  padding: 5px 10px;
+  background-color: #477bff;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+}
+
+#dialog-expand,
+#change-project-dialog {
   font-size: 1.2rem;
   width: 500px;
   margin: 0 auto;
