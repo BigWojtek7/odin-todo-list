@@ -13,16 +13,16 @@
       <form id="get-item" method="dialog">
 
         <label for="title">Title:</label>
-        <input id="title" type="text" name="title" required>
+        <input id="title" type="text" name="title" maxlength="15" required>
 
         <label for="description">Description:</label>
-        <input id="description" type="text" name="description" required>
+        <input id="description" type="text" name="description" maxlength="30" required>
 
         <label for="due-date">Due Date:</label>
         <input id="due-date" type="datetime-local" name="due-date" required>
 
         <label for="project">Project:</label>
-        <input id="project" type="text" name="project" placeholder="Not required">
+        <input id="project" type="text" name="project" maxlength="20" placeholder="Not required">
 
         <fieldset>
           <legend>Priority:</legend>
