@@ -17,7 +17,9 @@ function loadObject(){
 
     // console.log(JSON.parse(localStorage.getItem(localStorage.key(i))));
   }
-  todoArray.sort((a , b) => a.project > b.project ? 1 : -1);
+  // todoArray.sort((a , b) => a.project > b.project ? 1 : -1);
+
+  todoArray.sort((a,b) => a.project.localeCompare(b.project) || a.dueDate < b.dueDate);
   const getArray = () => todoArray;
   return {getArray}
 }

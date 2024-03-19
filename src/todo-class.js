@@ -1,8 +1,8 @@
 import { changeProject } from "./todo-methods";
 
 class ToDo {
-  constructor(title, description, dueDate, priority, isDone){
-    this.project = description;
+  constructor(project = "default", title, description, dueDate, priority, isDone){
+    this.project = project;
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;

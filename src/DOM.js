@@ -28,7 +28,7 @@ function displayHandler(){
 
     let newDivProject = document.createElement("div");
     newDivProject.dataset.project = todoArray[0].project
-    newDivProject.innerHTML = `<p class="title">${todoArray[0].project}</p> <button>Expand</button>`
+    newDivProject.innerHTML = `<p class="title">${todoArray[0].project}</p> <button>&bull;&bull;&bull;</button>`
 
     todoArray.forEach((el, index) => {
       const newDiv = document.createElement("div");
@@ -37,15 +37,15 @@ function displayHandler(){
       // newDivProject.appendChild(newButtonExpand);
       console.log(el)
 
-      newDiv.innerHTML = `${el.title}, ${el.description}, ${el.dueDate} 
-      <button data-index=${index}>Delete</button> <button data-expand=${index}>Project</button>`;
+      newDiv.innerHTML = `${el.title} &bull; ${el.description} &bull; ${el.dueDate} 
+      <button data-index=${index}>-</button> <button data-expand=${index}>Edit</button>`;
       
       if (newDivProject.dataset.project === el.project){
         newDivProject.appendChild(newDiv);
       } else {
         divContent.appendChild(newDivProject);
         newDivProject = document.createElement("div");
-        newDivProject.innerHTML = `<p class="title">${el.project}</p> <button>Expand</button>`
+        newDivProject.innerHTML = `<p class="title">${el.project}</p> <button>&bull;&bull;&bull;</button>`
         newDivProject.dataset.project = el.project;
         // newDivProject.appendChild(newButtonExpand);
         newDivProject.appendChild(newDiv);
@@ -98,11 +98,18 @@ function displayHandler(){
       // console.log(todoArray.filter(item => div.dataset.project === item.project));
       console.log(datasetDiv)
       const projectArray = todoArray.filter(item => datasetDiv === item.project)
+
+      const newTitleDiv = document.createElement("div")
+      newTitleDiv.classList.add("title-expand")
+      newTitleDiv.innerHTML=`<p class="title-expand">${projectArray[0].project}<p>
+      <ol class="description"><li>Title</li><li>Description</li><li>DueDate</li><li>Priority</li><li>isDone</li>`
+      dialogExpand.appendChild(newTitleDiv);
       console.log("funny", projectArray)
       projectArray.forEach(el => {
         
         const newDiv = document.createElement("div")
-        newDiv.innerHTML=`${el.project}, ${el.title}, ${el.description}, ${el.dueDate}, ${el.priority}, ${el.isDone}`
+        newDiv.innerHTML=`<ol><li>${el.title}</li><li>${el.description}</li>
+        <li>${el.dueDate}</li><li>${el.priority}</li><li>${el.isDone}</li></ol>`
         dialogExpand.appendChild(newDiv);
         dialogExpand.showModal();
       });
@@ -155,18 +162,20 @@ function displayHandler(){
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
+    let project = document.getElementById("project").value;
     const title = document.getElementById("title").value;
     const description = document.getElementById("description").value;
-    const dueDate = document.getElementById("due-date").value;
-    const priority = document.getElementById("priority").value;
-    const isDone = document.getElementById("is-done").value;
-    
-    let todo = new ToDo(title, description, dueDate, priority, isDone);
+    const dueDate = document.getElementById("due-date").value.replace("T", " ");
+    const priority = document.querySelector('input[name="priority"]:checked').value;
+    const isDone = document.querySelector('input[name="is-done"]:checked').value;
+
+    if(!project) project = undefined;
+
+    let todo = new ToDo(project, title, description, dueDate, priority, isDone);
     addTodo(todo);
     form.reset();
     dialog.close();
     updateDisplay()
-    console.log("2", deleteButton)
     // saveObject(todoArray)
     // updateDisplay();
   });
