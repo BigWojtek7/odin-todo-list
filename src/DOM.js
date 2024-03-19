@@ -21,9 +21,11 @@ function displayHandler(){
 
     const todoArray = loadObject().getArray();
     console.log("2", todoArray)
-    if (todoArray[0] === undefined) return
 
     divContent.textContent = "";
+    if (todoArray[0] === undefined) return
+
+    
     // todoArray.sort((a , b) => a.project > b.project ? 1 : -1)
 
     let newDivProject = document.createElement("div");
