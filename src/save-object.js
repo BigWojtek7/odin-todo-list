@@ -19,7 +19,8 @@ function loadObject(){
   }
   // todoArray.sort((a , b) => a.project > b.project ? 1 : -1);
 
-  todoArray.sort((a,b) => a.project.localeCompare(b.project) || a.dueDate < b.dueDate);
+  todoArray.sort((a,b) => a.project.localeCompare(b.project) || new Date(a.dueDate) - new Date(b.dueDate));
+  console.log("1", todoArray)
   const getArray = () => todoArray;
   return {getArray}
 }

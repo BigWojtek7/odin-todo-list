@@ -7,7 +7,7 @@ import './style.css';
 
 function displayHandler(){
   const dialog = document.getElementById("add-item");
-  const form = document.getElementById("get-book");
+  const form = document.getElementById("get-item");
 
   const addButton = document.getElementById("add-button");
   const closeButton = document.getElementById("close-button");
@@ -20,7 +20,7 @@ function displayHandler(){
   const updateDisplay = () => {
 
     const todoArray = loadObject().getArray();
-
+    console.log("2", todoArray)
     if (todoArray[0] === undefined) return
 
     divContent.textContent = "";
@@ -35,10 +35,14 @@ function displayHandler(){
       // const newButtonExpand = document.createElement("button")
       // newButtonExpand.innerHTML="Expand"
       // newDivProject.appendChild(newButtonExpand);
-      console.log(el)
 
       newDiv.innerHTML = `${el.title} &bull; ${el.description} &bull; ${el.dueDate} 
       <button data-index=${index}>-</button> <button data-expand=${index}>Edit</button>`;
+      if (el.priority === "High"){
+        newDiv.style.background = "linear-gradient( to left, #ef4444 1%, white 50%)";
+      } else {
+        newDiv.style.background = "linear-gradient( to left, #22c55e 1%, white 50%)";
+      }
       
       if (newDivProject.dataset.project === el.project){
         newDivProject.appendChild(newDiv);
@@ -77,7 +81,14 @@ function displayHandler(){
       changeProjectForm.addEventListener("submit", () =>{
         const changeProjectInput = document.getElementById("change-project-input")
 
-        todoArray[expandButton].project = changeProjectInput.value
+
+        if(changeProjectInput.value) todoArray[expandButton].project = changeProjectInput.value;
+        todoArray[expandButton].priority = document.querySelector('input[name="priority-change"]:checked').value;
+        todoArray[expandButton].isDone = document.querySelector('input[name="is-done-change"]:checked').value;
+
+        
+
+        
         saveObject(todoArray);
         updateDisplay();
         changeProjectDialog.close();
@@ -96,7 +107,6 @@ function displayHandler(){
       const todoArray = loadObject().getArray();
       dialogExpand.innerHTML= "";
       // console.log(todoArray.filter(item => div.dataset.project === item.project));
-      console.log(datasetDiv)
       const projectArray = todoArray.filter(item => datasetDiv === item.project)
 
       const newTitleDiv = document.createElement("div")
@@ -104,10 +114,14 @@ function displayHandler(){
       newTitleDiv.innerHTML=`<p class="title-expand">${projectArray[0].project}<p>
       <ol class="description"><li>Title</li><li>Description</li><li>DueDate</li><li>Priority</li><li>isDone</li>`
       dialogExpand.appendChild(newTitleDiv);
-      console.log("funny", projectArray)
       projectArray.forEach(el => {
         
         const newDiv = document.createElement("div")
+        if (el.priority === "High"){
+          newDiv.style.background = "linear-gradient( to left, #ef4444 1%, #f5f5f4 50%)";
+        } else {
+          newDiv.style.background = "linear-gradient( to left, #22c55e 1%, #f5f5f4 50%)";
+        }
         newDiv.innerHTML=`<ol><li>${el.title}</li><li>${el.description}</li>
         <li>${el.dueDate}</li><li>${el.priority}</li><li>${el.isDone}</li></ol>`
         dialogExpand.appendChild(newDiv);
@@ -168,7 +182,7 @@ function displayHandler(){
     const dueDate = document.getElementById("due-date").value.replace("T", " ");
     const priority = document.querySelector('input[name="priority"]:checked').value;
     const isDone = document.querySelector('input[name="is-done"]:checked').value;
-
+    
     if(!project) project = undefined;
 
     let todo = new ToDo(project, title, description, dueDate, priority, isDone);
