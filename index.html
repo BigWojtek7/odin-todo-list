@@ -10,7 +10,7 @@
       <h1>To-Do List Program</h1>
     </header>
     <dialog id="add-item">
-      <form id="get-book" method="dialog">
+      <form id="get-item" method="dialog">
 
         <label for="project">Project:</label>
         <input id="project" type="text" name="project">
@@ -54,6 +54,24 @@
       <dialog id="change-project-dialog">
         <form id="change-project-form">
           <input type="text" id="change-project-input" placeholder="Change project">
+          <fieldset>
+            <legend>Priority:</legend>
+            
+            <input id="low-change" type="radio" name="priority-change" value="Low" checked>
+            <label for="low-change">Low</label>
+  
+            <input id="high-change" type="radio" name="priority-change" value="High">
+            <label for="high-change">High</label>
+          </fieldset>
+          <fieldset>
+            <legend>Is done?</legend>
+            
+            <input id="yes-change" type="radio" name="is-done-change" value="Yes" >
+            <label for="yes-change">Yes</label>
+  
+            <input id="no-change" type="radio" name="is-done-change" value="No" checked>
+            <label for="no-change">No</label>
+          </fieldset>
           <button type="submit">Change</button>
           <button type="button" id="close-project-button">Close</button>
         </form>
