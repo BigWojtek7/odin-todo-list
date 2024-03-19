@@ -1,5 +1,3 @@
-import { changeProject } from "./todo-methods";
-
 class ToDo {
   constructor(project = "default", title, description, dueDate, priority, isDone){
     this.project = project;
@@ -12,8 +10,6 @@ class ToDo {
   changeProject(newProject){
     this.project = newProject;
   }
-
-
 }
 
 

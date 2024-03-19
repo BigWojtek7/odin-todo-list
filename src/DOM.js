@@ -1,6 +1,5 @@
 import { loadObject, saveObject, deleteObject, addTodo } from "./save-object";
 import { ToDo } from "./todo-class";
-import { programEngine } from ".";
 
 import './style.css';
 
@@ -14,19 +13,13 @@ function displayHandler(){
 
   const divContent = document.querySelector(".content");
   
-  
-
 
   const updateDisplay = () => {
 
     const todoArray = loadObject().getArray();
-    console.log("2", todoArray)
 
     divContent.textContent = "";
     if (todoArray[0] === undefined) return
-
-    
-    // todoArray.sort((a , b) => a.project > b.project ? 1 : -1)
 
     let newDivProject = document.createElement("div");
     newDivProject.dataset.project = todoArray[0].project
@@ -34,9 +27,6 @@ function displayHandler(){
 
     todoArray.forEach((el, index) => {
       const newDiv = document.createElement("div");
-      // const newButtonExpand = document.createElement("button")
-      // newButtonExpand.innerHTML="Expand"
-      // newDivProject.appendChild(newButtonExpand);
 
       newDiv.innerHTML = `${el.title} &bull; ${el.description} &bull; ${el.dueDate} 
       <button data-index=${index}>-</button> <button data-expand=${index}>Edit</button>`;
@@ -53,7 +43,6 @@ function displayHandler(){
         newDivProject = document.createElement("div");
         newDivProject.innerHTML = `<p class="title">${el.project}</p> <button>&bull;&bull;&bull;</button>`
         newDivProject.dataset.project = el.project;
-        // newDivProject.appendChild(newButtonExpand);
         newDivProject.appendChild(newDiv);
       }
     });
@@ -87,9 +76,6 @@ function displayHandler(){
         if(changeProjectInput.value) todoArray[expandButton].project = changeProjectInput.value;
         todoArray[expandButton].priority = document.querySelector('input[name="priority-change"]:checked').value;
         todoArray[expandButton].isDone = document.querySelector('input[name="is-done-change"]:checked').value;
-
-        
-
         
         saveObject(todoArray);
         updateDisplay();
@@ -99,16 +85,11 @@ function displayHandler(){
       })
 
       closeProjectButton.addEventListener("click", () => changeProjectDialog.close());
-
-
-
-
       
 
     } else if(datasetDiv) {
       const todoArray = loadObject().getArray();
       dialogExpand.innerHTML= "";
-      // console.log(todoArray.filter(item => div.dataset.project === item.project));
       const projectArray = todoArray.filter(item => datasetDiv === item.project)
 
       const newTitleDiv = document.createElement("div")
@@ -129,47 +110,15 @@ function displayHandler(){
         dialogExpand.appendChild(newDiv);
         dialogExpand.showModal();
       });
-      const closeExpandButton = document.createElement("button")
-      closeExpandButton.innerHTML = "Close"
+      const closeExpandButton = document.createElement("button");
+      closeExpandButton.innerHTML = "Close";
       dialogExpand.appendChild(closeExpandButton);
       closeExpandButton.addEventListener("click", () => dialogExpand.close());
-
     }
   }
 
   divContent.addEventListener("click", clickHandler);
-  // const deleteButton = document.querySelectorAll("[data-index]");
-  // console.log("1", deleteButton)
-  // deleteButton.forEach(button => {
-  //   button.addEventListener("click", () => {
-  //     deleteObject(button.dataset.index);
-  //     updateDisplay();
-  //     console.log(button.dataset.index);
-  //   });
-  // });
-
-  // const dialogExpand = document.querySelector(".dialog-expand")
-
-  // const divProject = document.querySelectorAll("[data-project]");
-  // divProject.forEach(div => {
-  //   div.addEventListener("click", () => {
-  //     const todoArray = loadObject().getArray();
-  //     dialogExpand.innerHTML= "";
-  //     // console.log(todoArray.filter(item => div.dataset.project === item.project));
-  //     const projectArray = todoArray.filter(item => div.dataset.project === item.project)
-  //     console.log("funny", projectArray)
-  //     projectArray.forEach(el => {
-        
-  //       const newDiv = document.createElement("div")
-  //       newDiv.innerHTML=`${el.project}, ${el.title}, ${el.description}, ${el.dueDate}, ${el.priority}, ${el.isDone},`
-  //       dialogExpand.appendChild(newDiv);
-  //       dialogExpand.showModal();
-  //     });
-      
-  //   });
-    
-  // });
-
+  
 
   addButton.addEventListener("click", () => {
     dialog.showModal();
@@ -192,12 +141,9 @@ function displayHandler(){
     form.reset();
     dialog.close();
     updateDisplay()
-    // saveObject(todoArray)
-    // updateDisplay();
+
   });
   
-
-  // return {updateDisplay}
 
 }
 

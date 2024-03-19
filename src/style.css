@@ -51,13 +51,6 @@ ol {
   grid-auto-flow: column;
 }
 
-/* #get-item {
-  display: grid;
-  width: 500px;
-  margin: 0 auto;
-
-} */
-
 .add-item #add-button {
   font-size: 3rem;
   margin: 20px 0 0 20px;
