@@ -1,42 +1,47 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ESLintPlugin = require("eslint-webpack-plugin");
 
 module.exports = {
-  mode: 'development',
+  mode: "development",
   entry: {
-    index: './src/DOM.js',
+    index: "./src/DOM.js",
   },
 
   devServer: {
-    watchFiles: ['./src/index.html'],
-    static: './dist',
+    watchFiles: ["./src/index.html"],
+    static: "./dist",
   },
 
-  devtool: 'inline-source-map',
+  devtool: "inline-source-map",
   devServer: {
-    static: './dist',
+    static: "./dist",
   },
   plugins: [
     new HtmlWebpackPlugin({
       // title: 'Development',
-      template: './src/index.html',
-      filename: 'index.html',
-      inject: 'body',
+      template: "./src/index.html",
+      filename: "index.html",
+      inject: "body",
+    }),
+    new ESLintPlugin({
+      extensions: [`js`, `jsx`],
+      exclude: [`/node_modules/`],
     }),
   ],
-    output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+  output: {
+    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, "dist"),
     clean: true,
   },
-    optimization: {
-    runtimeChunk: 'single',
+  optimization: {
+    runtimeChunk: "single",
   },
   module: {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
