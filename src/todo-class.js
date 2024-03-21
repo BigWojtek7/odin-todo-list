@@ -1,5 +1,12 @@
 class ToDo {
-  constructor(project = "default", title, description, dueDate, priority, isDone){
+  constructor(
+    title,
+    description,
+    dueDate,
+    priority,
+    isDone,
+    project = "default",
+  ) {
     this.project = project;
     this.title = title;
     this.description = description;
@@ -7,10 +14,10 @@ class ToDo {
     this.priority = priority;
     this.isDone = isDone;
   }
-  changeProject(newProject){
+
+  changeProject(newProject) {
     this.project = newProject;
   }
 }
 
-
-export {ToDo}
+export default ToDo
